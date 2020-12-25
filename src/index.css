@@ -1,0 +1,17 @@
+body{
+    background-color:#181A1B;
+}
+
+.array-bar{
+    width:3px;
+    background-color: teal;
+    display: inline-block;
+    margin:0 1px;
+}
+
+.array-container{
+    position: absolute;
+}
+
+.ui-container{
+}
