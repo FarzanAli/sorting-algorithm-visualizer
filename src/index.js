@@ -9,7 +9,13 @@ class SortingVis extends React.Component{
         this.state = {
             array: [],
             test: [],
-            size: 0
+            size: 50,
+            history: {
+                lesser: [],
+                pivot: [],
+                greater: []
+            },
+            steps: []
         };
     }
 
@@ -17,21 +23,32 @@ class SortingVis extends React.Component{
         this.resetArray(this.state.size);
     }
 
-    resetArray(){
-        let array = [];
-        for(let i = 0; i < this.state.size; i++){
-            array.push(randomInt(5, 730));
-        }
-
-        let test = []
-        for(let i = 0; i < array.length; i++){
-            test.push(array[i])
-        }
-        test.sort(function(a, b) {
+    defaultSort(l){
+        let x = duplicateArray(l)
+        x.sort(function(a, b) {
             return a - b;
         });
+        return x
+    }
 
-        this.setState({array, test})    
+    resetArray(){
+        let a = [];
+        for(let i = 0; i < this.state.size; i++){
+            a.push(randomInt(5, 730));
+        }
+
+        let t = duplicateArray(a)
+        t = this.defaultSort(t)
+
+        this.setState({
+            array: a,
+            test: t,
+            history: {
+                lesser: [],
+                pivot: [],
+                greater: []
+            }
+        })
     }
 
     addToArray(l, c){
@@ -47,24 +64,24 @@ class SortingVis extends React.Component{
     }
 
     quickSortHandler(e, t){
-        if(e !== e.sort){
-            let l = this.quickSort(e)
-            
-            if(JSON.stringify(l) === JSON.stringify(t)){
+        let a = this.defaultSort(e)
+        if(e !== a){
+            e = this.quickSort(e)
+            if(JSON.stringify(e) === JSON.stringify(t)){
                 this.setState({
-                    array: l
+                    array: e
                 })
+
             }
-            else{console.log(this.state, l)}
+            else{console.log(this.state, e)}
         }
+        console.log(this.state)
+
     }
 
     quickSort(e){
-        let l = []
-        for(let i = 0; i < e.length; i++){
-            l.push(e[i])
-        }
-        if(l.length === 1 || l.length === 0 || typeof(l) === "number"){
+        let l = duplicateArray(e)
+        if(l.length === 1 || l.length === 0){
             return l
         }
 
@@ -74,7 +91,6 @@ class SortingVis extends React.Component{
 
         l.splice(0, 1);
         
-
         for(let i = 0; i < l.length; i++){
             
             if(l[i] < pivot){
@@ -87,10 +103,13 @@ class SortingVis extends React.Component{
 
         let final = []
 
+        this.state.history.lesser.push(lesser)
+        this.state.history.pivot.push(pivot)
+        this.state.history.greater.push(greater)
+
         this.addToArray(final, this.quickSort(lesser))
         this.addToArray(final, pivot)
         this.addToArray(final, this.quickSort(greater))
-
         return final
     }
 
@@ -109,10 +128,10 @@ class SortingVis extends React.Component{
         return(
             <div>
                 <div className = "ui-container">
-                    <button onClick={() => this.resetArray(10)}>New Array</button>
-                    <button onClick={() => this.quickSortHandler(this.state.array, this.state.test)}>Quick Sort</button>
                     <label for="size">Size: </label>
                     <input type="number" id="size" value={this.state.size} onChange={this.updateSearch.bind(this)}/>
+                    <button onClick={() => this.resetArray(10)}>New Array</button>
+                    <button onClick={() => this.quickSortHandler(this.state.array, this.state.test)}>Quick Sort</button>
                 </div>
                 <div className = "array-container">
                     {mappedArray}
@@ -120,6 +139,12 @@ class SortingVis extends React.Component{
             </div>
         );
     }
+}
+
+function duplicateArray(l){
+    let x = [];
+    for(let i = 0; i < l.length; i++){x.push(l[i]);}
+    return x;
 }
 
 function randomInt(a, b){
