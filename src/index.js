@@ -37,8 +37,13 @@ class SortingVis extends React.Component{
             a.push(randomInt(5, 730));
         }
 
-        let t = duplicateArray(a)
-        t = this.defaultSort(t)
+        let t = duplicateArray(a);
+        t = this.defaultSort(t);
+
+        for(let i = 0; i < a.length; i++){
+            a[i] = [a[i]];
+            a[i].push(i);
+        }
 
         this.setState({
             array: a,
@@ -47,40 +52,37 @@ class SortingVis extends React.Component{
                 lesser: [],
                 pivot: [],
                 greater: []
-            }
-        })
+            },
+            steps: []
+        });
     }
 
     addToArray(l, c){
-        if(typeof(c) === "object"){
+        if(c.length !== 0){
             for(let i = 0; i < c.length; i++){
                 l.push(c[i])
             }
         }
-        else if(typeof(c) === "number"){
-            l.push(c)
-        }
-        return l
+        return l;
     }
 
     quickSortHandler(e, t){
-        let a = this.defaultSort(e)
-        if(e !== a){
-            e = this.quickSort(e)
-            if(JSON.stringify(e) === JSON.stringify(t)){
+        let a = this.defaultSort(getValueArray(e));
+        if(getValueArray(e) !== a){
+            e = this.quickSort(e);
+            if(JSON.stringify(getValueArray(e)) === JSON.stringify(t)){
                 this.setState({
                     array: e
-                })
+                });
 
             }
-            else{console.log(this.state, e)}
+            else{console.log(this.state, e);}
         }
-        console.log(this.state)
-
     }
 
     quickSort(e){
         let l = duplicateArray(e)
+
         if(l.length === 1 || l.length === 0){
             return l
         }
@@ -92,24 +94,25 @@ class SortingVis extends React.Component{
         l.splice(0, 1);
         
         for(let i = 0; i < l.length; i++){
-            
-            if(l[i] < pivot){
+            if(l[i][0] < pivot[0]){
                 lesser.push(l[i]);
             }
-            else if(l[i] >= pivot){
+            else if(l[i][0] >= pivot[0]){
                 greater.push(l[i]);
-            }            
+            }
         }
 
         let final = []
 
+        
         this.state.history.lesser.push(lesser)
         this.state.history.pivot.push(pivot)
         this.state.history.greater.push(greater)
 
         this.addToArray(final, this.quickSort(lesser))
-        this.addToArray(final, pivot)
+        final.push(pivot)
         this.addToArray(final, this.quickSort(greater))
+        
         return final
     }
 
@@ -120,11 +123,10 @@ class SortingVis extends React.Component{
     }
 
     render(){
-        const {array} = this.state;
+        const array = getValueArray(this.state.array);
         const mappedArray = array.map((value, idx) => (
             <div className = "array-bar" key={idx} style={{height: `${value}px`}}></div>
         ))
-
         return(
             <div>
                 <div className = "ui-container">
@@ -139,6 +141,14 @@ class SortingVis extends React.Component{
             </div>
         );
     }
+}
+
+function getValueArray(l){
+    let a = [];
+    for(let i = 0; i < l.length; i++){
+        a.push(l[i][0]);
+    }
+    return a;
 }
 
 function duplicateArray(l){
