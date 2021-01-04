@@ -8,6 +8,7 @@ class SortingVis extends React.Component {
 
         this.state = {
             array: [],
+            unsortedArray: [],
             test: [],
             size: 50,
             history: {
@@ -15,7 +16,9 @@ class SortingVis extends React.Component {
                 pivot: [],
                 greater: []
             },
-            steps: []
+            sortedSubArrays: [],
+            steps: [],
+            stepsCounter: 0
         };
     }
 
@@ -47,15 +50,20 @@ class SortingVis extends React.Component {
             a[i].push(i);
         }
 
+        let u = duplicateArray(a)
+
         this.setState({
             array: a,
+            unsortedArray: u,
             test: t,
             history: {
                 lesser: [],
                 pivot: [],
                 greater: []
             },
-            steps: []
+            sortedSubArrays: [],
+            steps: [],
+            stepsCounter: 0
         });
     }
 
@@ -65,7 +73,6 @@ class SortingVis extends React.Component {
                 l.push(c[i])
             }
         }
-        return l;
     }
 
     quickSortHandler(e, t) {
@@ -80,13 +87,28 @@ class SortingVis extends React.Component {
             }
             else { console.log(this.state, e); }
         }
-        // console.log(this.state)
-        let s = [];
+
+        let sSubArrays = [];
         for (let i = 0; i < this.state.history.lesser.length; i++) {
-            s.push(combineSteps(this.state.history.lesser[i], this.state.history.pivot[i], this.state.history.greater[i]))
+            sSubArrays.push(combineSteps(this.state.history.lesser[i], this.state.history.pivot[i], this.state.history.greater[i]))
         }
-        this.state.steps = s
-        console.log(this.state)
+
+        this.setState({ sortedSubArrays: sSubArrays }, () => {
+            let s = [];
+            for (let i = 0; i < this.state.sortedSubArrays.length + 1; i++) {
+                if (i === 0) {
+                    s.push(duplicateArray(this.state.unsortedArray))
+                }
+                if (i === 1) {
+                    s.push(this.state.sortedSubArrays[0])
+                }
+                else if (i >= 1) {
+                    let newArray = replaceItems(s[i - 1], this.state.sortedSubArrays[i - 1])
+                    s.push(newArray)
+                }
+            }
+            this.setState({ steps: s })
+        })
     }
 
     quickSort(e) {
@@ -125,6 +147,16 @@ class SortingVis extends React.Component {
         return final
     }
 
+    iterateSteps() {
+        let counter = this.state.stepsCounter
+        if (counter < this.state.steps.length) {
+            this.setState({
+                array: this.state.steps[counter],
+                stepsCounter: counter + 1
+            })
+        }
+    }
+
     updateSearch(event) {
         this.setState({
             size: event.target.value.substr(0, 3)
@@ -143,6 +175,7 @@ class SortingVis extends React.Component {
                     <input type="number" id="size" value={this.state.size} onChange={this.updateSearch.bind(this)} />
                     <button onClick={() => this.resetArray(10)}>New Array</button>
                     <button onClick={() => this.quickSortHandler(this.state.array, this.state.test)}>Quick Sort</button>
+                    <button onClick={() => this.iterateSteps()}>Next Step</button>
                 </div>
                 <div className="array-container">
                     {mappedArray}
@@ -150,6 +183,35 @@ class SortingVis extends React.Component {
             </div>
         );
     }
+}
+
+function replaceItems(l, c) {
+    l = duplicateArray(l)
+    c = duplicateArray(c)
+
+    let mins = [];
+    for (let i = 0; i < c.length; i++) {
+        for (let j = 0; j < l.length; j++) {
+            if (JSON.stringify(l[j]) === JSON.stringify(c[i])) {
+                mins.push(j)
+            }
+        }
+    }
+
+    let index = Math.min(...mins);
+    l.splice(index, c.length);
+
+    let a = [];
+    for (let i = 0; i < index; i++) {
+        a.push(l[i]);
+    }
+    let b = [];
+    for (let i = index; i < l.length; i++) {
+        b.push(l[i]);
+    }
+    a = a.concat(c, b);
+
+    return a;
 }
 
 function combineSteps(a, b, c) {
