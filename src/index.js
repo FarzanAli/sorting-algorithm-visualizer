@@ -18,6 +18,7 @@ class SortingVis extends React.Component {
             },
             sortedSubArrays: [],
             steps: [],
+            animatedSteps: [],
             stepsCounter: 0
         };
     }
@@ -63,6 +64,7 @@ class SortingVis extends React.Component {
             },
             sortedSubArrays: [],
             steps: [],
+            animatedSteps: [],
             stepsCounter: 0
         });
     }
@@ -107,7 +109,7 @@ class SortingVis extends React.Component {
                     s.push(newArray)
                 }
             }
-            this.setState({ steps: s })
+            this.setState({ steps: s }, () => {console.log(this.state)})
         })
     }
 
@@ -166,8 +168,9 @@ class SortingVis extends React.Component {
     render() {
         const array = getValueArray(this.state.array);
         const mappedArray = array.map((value, idx) => (
-            <div className="array-bar" key={idx} style={{ height: `${value}px` }}></div>
+            <div className="array-bar" key={idx} style={{ height: `${value}px`}}></div>
         ))
+        const testArray = mappedArray
         return (
             <div>
                 <div className="ui-container">
