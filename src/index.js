@@ -80,6 +80,8 @@ class SortingVis extends React.Component {
     }
 
     quickSortHandler(e, t) {
+
+        //If array was sorted correctly, set it to state(Display it).
         let a = this.defaultSort(getValueArray(e));
         if (getValueArray(e) !== a) {
             e = this.quickSort(e);
@@ -92,12 +94,12 @@ class SortingVis extends React.Component {
             else { console.log(this.state, e); }
         }
 
-        let sSubArrays = [];
+        let sortedSubArrays = [];
         for (let i = 0; i < this.state.history.lesser.length; i++) {
-            sSubArrays.push(combineSteps(this.state.history.lesser[i], this.state.history.pivot[i], this.state.history.greater[i]))
+            sortedSubArrays.push(combineSteps(this.state.history.lesser[i], this.state.history.pivot[i], this.state.history.greater[i]))
         }
 
-        this.setState({ sortedSubArrays: sSubArrays }, () => {
+        this.setState({ sortedSubArrays: sortedSubArrays }, () => {
             let s = [];
             for (let i = 0; i < this.state.sortedSubArrays.length + 1; i++) {
                 if (i === 0) {
@@ -111,7 +113,7 @@ class SortingVis extends React.Component {
                     s.push(newArray)
                 }
             }
-            this.setState({ steps: s }, () => {console.log(this.state)})
+            this.setState({ steps: s })
         })
     }
 
@@ -153,7 +155,6 @@ class SortingVis extends React.Component {
     
     iterateSteps() {
         this.quickSortHandler(this.state.array, this.state.test)
-        setTimeout(console.log(""), 10000)
         setInterval(() => {
             let counter = this.state.stepsCounter
             if (counter < this.state.steps.length) {
@@ -176,7 +177,6 @@ class SortingVis extends React.Component {
         const mappedArray = array.map((value, idx) => (
             <div className="array-bar" key={idx} style={{ height: `${value}px`}}></div>
         ))
-        const testArray = mappedArray
         return (
             <div>
                 <div className="ui-container">
