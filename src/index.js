@@ -1,3 +1,9 @@
+/**
+ * @author: Farzan Ali Faisal
+ * 
+ * Implements quicksort algorithm to sort a randomized array.
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -94,11 +100,13 @@ class SortingVis extends React.Component {
             else { console.log(this.state, e); }
         }
 
+        //Creates an array of sorted sub arrays from the quicksort process.
         let sortedSubArrays = [];
         for (let i = 0; i < this.state.history.lesser.length; i++) {
             sortedSubArrays.push(combineSteps(this.state.history.lesser[i], this.state.history.pivot[i], this.state.history.greater[i]))
         }
 
+        //Creates an array of steps the quicksort algorithm takes to sort using sortedSubArrays which used history.
         this.setState({ sortedSubArrays: sortedSubArrays }, () => {
             let s = [];
             for (let i = 0; i < this.state.sortedSubArrays.length + 1; i++) {
@@ -117,12 +125,15 @@ class SortingVis extends React.Component {
         })
     }
 
+    //recursive quicksort algorithm.
     quickSort(e) {
         let l = duplicateArray(e)
 
+        //base case.
         if (l.length === 1 || l.length === 0) {
             return l
         }
+
 
         let pivot = l[0];
         let lesser = [];
@@ -130,6 +141,7 @@ class SortingVis extends React.Component {
 
         l.splice(0, 1);
 
+        //Pushes elements from unsorted array into their respective lesser or greater than pivot arrays.
         for (let i = 0; i < l.length; i++) {
             if (l[i][0] < pivot[0]) {
                 lesser.push(l[i]);
@@ -141,11 +153,12 @@ class SortingVis extends React.Component {
 
         let final = []
 
-
+        //Stores lesser, pivot, and greater in state.
         this.state.history.lesser.push(lesser)
         this.state.history.pivot.push(pivot)
         this.state.history.greater.push(greater)
 
+        //Builds final sorted array.
         this.addToArray(final, this.quickSort(lesser))
         final.push(pivot)
         this.addToArray(final, this.quickSort(greater))
@@ -153,6 +166,7 @@ class SortingVis extends React.Component {
         return final
     }
     
+    //Iterates over steps in a timely manner.
     iterateSteps() {
         this.quickSortHandler(this.state.array, this.state.test)
         setInterval(() => {
@@ -193,6 +207,7 @@ class SortingVis extends React.Component {
         );
     }
 }
+
 
 function replaceItems(l, c) {
     l = duplicateArray(l)
@@ -249,12 +264,14 @@ function getValueArray(l) {
     return a;
 }
 
+//Duplicates array.
 function duplicateArray(l) {
     let x = [];
     for (let i = 0; i < l.length; i++) { x.push(l[i]); }
     return x;
 }
 
+//generates random int.
 function randomInt(a, b) {
     return Math.floor(a + Math.random() * (1 + b - a));
 }
