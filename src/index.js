@@ -5,7 +5,7 @@ import './index.css';
 class SortingVis extends React.Component {
     constructor(props) {
         super(props);
-
+        //state
         this.state = {
             array: [],
             unsortedArray: [],
@@ -27,6 +27,7 @@ class SortingVis extends React.Component {
         this.resetArray(this.state.size);
     }
 
+    //Sorting function.
     defaultSort(l) {
         let x = duplicateArray(l)
         x.sort(function (a, b) {
@@ -36,7 +37,7 @@ class SortingVis extends React.Component {
     }
 
 
-
+    //Resets array in state along with other properties.
     resetArray() {
         let a = [];
         for (let i = 0; i < this.state.size; i++) {
@@ -69,6 +70,7 @@ class SortingVis extends React.Component {
         });
     }
 
+    //Adds contents of c to l. Copies array essentially.
     addToArray(l, c) {
         if (c.length !== 0) {
             for (let i = 0; i < c.length; i++) {
@@ -148,15 +150,19 @@ class SortingVis extends React.Component {
 
         return final
     }
-
+    
     iterateSteps() {
-        let counter = this.state.stepsCounter
-        if (counter < this.state.steps.length) {
-            this.setState({
-                array: this.state.steps[counter],
-                stepsCounter: counter + 1
-            })
-        }
+        this.quickSortHandler(this.state.array, this.state.test)
+        setTimeout(console.log(""), 10000)
+        setInterval(() => {
+            let counter = this.state.stepsCounter
+            if (counter < this.state.steps.length) {
+                this.setState({
+                    array: this.state.steps[counter],
+                    stepsCounter: counter + 1
+                })
+            }
+        }, 50)
     }
 
     updateSearch(event) {
@@ -178,7 +184,7 @@ class SortingVis extends React.Component {
                     <input type="number" id="size" value={this.state.size} onChange={this.updateSearch.bind(this)} />
                     <button onClick={() => this.resetArray(10)}>New Array</button>
                     <button onClick={() => this.quickSortHandler(this.state.array, this.state.test)}>Quick Sort</button>
-                    <button onClick={() => this.iterateSteps()}>Next Step</button>
+                    <button onClick={() => this.iterateSteps()}>Show Steps</button>
                 </div>
                 <div className="array-container">
                     {mappedArray}
