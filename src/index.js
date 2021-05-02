@@ -31,7 +31,7 @@ class SortingVis extends React.Component {
     }
 
     componentDidMount() {
-        this.resetArray(this.state.size);
+        this.resetArray();
     }
 
     //Sorting function.
@@ -195,11 +195,11 @@ class SortingVis extends React.Component {
         return (
             <div>
                 <div className="ui-container">
-                    <label for="size">Size: </label>
-                    <input type="number" id="size" value={this.state.size} onChange={this.updateSearch.bind(this)} />
-                    <button onClick={() => this.resetArray(10)}>New Array</button>
-                    <button onClick={() => this.iterateSteps()}>Quick Sort</button>
                     <UI
+                    size={this.state.size}
+                    updateSearch={this.updateSearch.bind(this)}
+                    resetArray={this.resetArray.bind(this)}
+                    iterateSteps={this.iterateSteps.bind(this)}
                     />
                 </div>
                 <div className="array-container">
