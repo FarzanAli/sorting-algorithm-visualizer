@@ -7,6 +7,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import UI from './components/UI';
 
 class SortingVis extends React.Component {
     constructor(props) {
@@ -197,8 +198,9 @@ class SortingVis extends React.Component {
                     <label for="size">Size: </label>
                     <input type="number" id="size" value={this.state.size} onChange={this.updateSearch.bind(this)} />
                     <button onClick={() => this.resetArray(10)}>New Array</button>
-                    <button onClick={() => this.quickSortHandler(this.state.array, this.state.test)}>Quick Sort</button>
-                    <button onClick={() => this.iterateSteps()}>Show Steps</button>
+                    <button onClick={() => this.iterateSteps()}>Quick Sort</button>
+                    <UI
+                    />
                 </div>
                 <div className="array-container">
                     {mappedArray}
