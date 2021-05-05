@@ -194,14 +194,12 @@ class SortingVis extends React.Component {
         ))
         return (
             <div>
-                <div className="ui-container">
-                    <UI
-                    size={this.state.size}
-                    updateSearch={this.updateSearch.bind(this)}
-                    resetArray={this.resetArray.bind(this)}
-                    iterateSteps={this.iterateSteps.bind(this)}
-                    />
-                </div>
+                <UI
+                size={this.state.size}
+                updateSearch={this.updateSearch.bind(this)}
+                resetArray={this.resetArray.bind(this)}
+                iterateSteps={this.iterateSteps.bind(this)}
+                />
                 <div className="array-container">
                     {mappedArray}
                 </div>

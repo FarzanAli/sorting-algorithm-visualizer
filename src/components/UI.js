@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 
 export default class UI extends Component{
-    constructor(props){
-        super(props);
-    }
     render(){
         return(
-            <>
-            <label for="size">Size: </label>
-            <input type="number" id="size" value={this.props.size} onChange={this.props.updateSearch} />
-            <button onClick={this.props.resetArray}>New Array</button>
-            <button onClick={() => this.props.iterateSteps()}>Quick Sort</button>
-            </>
+            <div className="ui-container">
+                <input type="number" className="sizeInput" value={this.props.size} onChange={this.props.updateSearch} />
+                <button className="button" onClick={this.props.resetArray}>New Array</button>
+                <button className="button" onClick={this.props.iterateSteps}>Quick Sort</button>
+            </div>
         );
     }
 }

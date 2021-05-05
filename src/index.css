@@ -1,18 +1,63 @@
-body{
-    background-color:#181A1B;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Source+Sans+Pro:ital,wght@0,900;1,900&display=swap');
+
+:root{
+    --page-color:#030200;
+    --ui-container: #0F0F0F;
+    --button-color: rgb(0, 155, 155);
+    --ui-width: 45vw;
 }
 
-.array-bar{
-    width:6px;
-    background-color: teal;
+body{
+    background-color: var(--page-color);
+    
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.ui-container{
     display: inline-block;
-    margin:0 1px;
+    
+    color: white;
+    background-color: var(--ui-container);
+    
+    width: var(--ui-width);
+    height: 5vh;
+
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sizeInput{
+    display: inline-block;
+    
+    border: none;
+
+    height: 2vh;
+    width: 38%;
+}
+
+.button{
+    display: inline-block;
+
+    border: none;
+
+    height: 2vh;
+    width: 20%;
 }
 
 .array-container{
     position: absolute;
 }
 
-.ui-container{
-    color: white;
+.array-bar{
+    width: 6px;
+    background-color: var(--button-color);
+    display: inline-block;
+    margin: 0 1px;
 }
