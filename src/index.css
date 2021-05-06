@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Source+Sans+Pro:ital,wght@0,900;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 :root{
-    --page-color:#030200;
-    --ui-container: #0F0F0F;
-    --button-color: rgb(0, 155, 155);
+    --ui-container:#030200;
+    --shade-1: #99B6C5;
+    --shade-2: #85A2B1;
+    --shade-3: #718E9D;
+    --shade-4: #5D7A89;
+    --shade-5: #496675;
     --ui-width: 45vw;
 }
 
 body{
-    background-color: var(--page-color);
+    background-color: var(--shade-1);
     
-    font-family: 'Open Sans', sans-serif;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato', sans-serif;
     
     display: flex;
     justify-content: center;
@@ -21,34 +23,64 @@ body{
     display: inline-block;
     
     color: white;
-    background-color: var(--ui-container);
     
     width: var(--ui-width);
-    height: 5vh;
+    height: 7vh;
 
-    border-radius: 10px;
+    border-radius: 7px;
 
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.sizeInput{
+.size-container{
     display: inline-block;
-    
+
+    border: 3px solid var(--shade-5);
+    border-radius: 5px;
+
+    background-color: var(--shade-1);
+}
+
+#sizeLabel{
+    color: var(--shade-5);
+    font-size: 1.5vw;
+    margin-left: 1vw;
+}
+
+.sizeInput{
+    margin-left: 1vw;
+    display: inline-block;
+
     border: none;
 
-    height: 2vh;
-    width: 38%;
+    background-color: var(--shade-1);
+    color: var(--shade-5);
+
+    font-size: 1.5vw;
+
+    height: 3.4vh;
 }
 
 .button{
     display: inline-block;
 
-    border: none;
+    border-radius: 5px;
+    border: 3px solid var(--shade-5);
 
-    height: 2vh;
+    background-color: var(--shade-1);
+    color: var(--shade-5);
+
+    font-size: 1.3vw;
+
+    height: 4vh;
     width: 20%;
+}
+
+.button:hover{
+    background-color: var(--shade-3);
+    transition: background-color 0.25s;
 }
 
 .array-container{
@@ -57,7 +89,7 @@ body{
 
 .array-bar{
     width: 6px;
-    background-color: var(--button-color);
+    background-color: var(--shade-5);
     display: inline-block;
     margin: 0 1px;
 }
