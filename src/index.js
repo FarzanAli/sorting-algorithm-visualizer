@@ -193,7 +193,7 @@ class SortingVis extends React.Component {
             <div className="array-bar" key={idx} style={{ height: `${value}px`}}></div>
         ))
         return (
-            <div>
+            <div className="content-container">
                 <UI
                 size={this.state.size}
                 updateSearch={this.updateSearch.bind(this)}
