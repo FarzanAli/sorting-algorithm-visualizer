@@ -7,17 +7,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 :root{
-    --ui-container:#030200;
-    --shade-1: #99B6C5;
-    --shade-2: #85A2B1;
-    --shade-3: #718E9D;
-    --shade-4: #5D7A89;
-    --shade-5: #496675;
+    --background-color: #2C2F33;
+    --hover-color: #5a6068;
+    --ui-color: #99AAB5;
     --ui-width: 45vw;
 }
 
 body{
-    background-color: var(--shade-1);
+    background-color: var(--background-color);
     
     font-family: 'Lato', sans-serif;
     
@@ -39,7 +36,6 @@ body{
     height: 7vh;
 
     border-radius: 7px;
-    /* background-color: var(--shade-5); */
 
     display: flex;
     justify-content: space-evenly;
@@ -49,15 +45,14 @@ body{
 .size-container{
     display: inline-block;
     
-    border-bottom: 3px solid var(--shade-5);
+    border-bottom: 2px solid var(--ui-color);
 
-    background-color: var(--shade-1);
+    background-color: var(--background-color);
 }
 
 #sizeLabel{
-    color: var(--shade-5);
+    color: var(--ui-color);
     font-size: 1.5vw;
-    /* margin-left: 1vw; */
 }
 
 .sizeInput{
@@ -67,8 +62,8 @@ body{
     border: none;
     outline:none;
 
-    background-color: var(--shade-1);
-    color: var(--shade-5);
+    background-color: var(--background-color);
+    color: var(--ui-color);
 
     font-size: 1.5vw;
 
@@ -80,10 +75,10 @@ body{
     display: inline-block;
 
     border-radius: 5px;
-    border: 3px solid var(--shade-5);
+    border: 2px solid var(--ui-color);
 
-    background-color: var(--shade-1);
-    color: var(--shade-5);
+    background-color: var(--background-color);
+    color: var(--ui-color);
 
     font-size: 1.3vw;
 
@@ -92,8 +87,8 @@ body{
 }
 
 .button:hover{
-    background-color: var(--shade-3);
-    transition: background-color 0.25s;
+    background-color: var(--hover-color);
+    transition: background-color 0.1s;
 }
 
 .array-container{
@@ -103,7 +98,7 @@ body{
 
 .array-bar{
     width: 6px;
-    background-color: var(--shade-5);
+    background-color: var(--ui-color);
     display: inline-block;
     margin: 0 1px;
 }
