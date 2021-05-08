@@ -32,11 +32,6 @@ class SortingVis extends React.Component {
 
     componentDidMount() {
         this.resetArray();
-        document.addEventListener('keydown', (event) => {
-            if(event.key === "Enter"){
-                this.resetArray();
-            }
-        })
     }
 
     //Sorting function.
@@ -195,7 +190,7 @@ class SortingVis extends React.Component {
     render() {
         const array = getValueArray(this.state.array);
         const mappedArray = array.map((value, idx) => (
-            <div className="array-bar" key={idx} style={{ height: `${value/13.5}vh`}}></div>
+            <div className="array-bar" key={idx} style={{ height: `${value}px`}}></div>
         ))
         return (
             <div className="content-container">
