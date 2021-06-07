@@ -55,7 +55,6 @@ class SortingVis extends React.Component {
         for (let i = 0; i < this.state.size; i++) {
             a.push(randomInt(5, 730));
         }
-
         let t = duplicateArray(a);
         t = this.defaultSort(t);
 
@@ -175,7 +174,7 @@ class SortingVis extends React.Component {
     //Iterates over steps in a timely manner.
     iterateSteps() {
         this.quickSortHandler(this.state.array, this.state.test)
-        setInterval(() => {
+        var iterate = window.setInterval(() => {
             let counter = this.state.stepsCounter
             if (counter < this.state.steps.length) {
                 this.setState({
@@ -183,7 +182,10 @@ class SortingVis extends React.Component {
                     stepsCounter: counter + 1
                 })
             }
-        }, 50)
+            if(this.state.stepsCounter === this.state.steps.length && this.state.stepsCounter !== 0){
+                clearInterval(iterate);
+            }
+        }, 100);
     }
 
     updateSearch(event) {
@@ -192,11 +194,58 @@ class SortingVis extends React.Component {
         })
     }
 
+    isLesser(element){
+        if(this.state.history.lesser.length > 0 && this.state.stepsCounter < this.state.history.lesser.length){
+            for(let i = 0; i < this.state.history.lesser[this.state.stepsCounter].length; i++){
+                if(this.state.history.lesser[this.state.stepsCounter][i] === element){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    isPivot(element){
+        if(this.state.history.pivot.length > 0 && this.state.stepsCounter < this.state.history.pivot.length){
+            if(element === this.state.history.pivot[this.state.stepsCounter]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isGreater(element){
+        if(this.state.history.greater.length > 0 && this.state.stepsCounter < this.state.history.greater.length){
+            for(let i = 0; i < this.state.history.greater[this.state.stepsCounter].length; i++){
+                if(this.state.history.greater[this.state.stepsCounter][i] === element){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    determineColour(element){
+        if(this.isLesser(element)){
+            return `red`;
+        }
+        else if(this.isPivot(element)){
+            return `yellow`;
+        }
+        else if(this.isGreater(element)){
+            return `green`;
+        }
+        else{
+            return `#99AAB5`;
+        }
+    }
+
     render() {
-        const array = getValueArray(this.state.array);
-        const mappedArray = array.map((value, idx) => (
-            <div className="array-bar" key={idx} style={{ height: `${value/13.5}vh`}}></div>
-        ))
+        const array = this.state.array;
+        const mappedArray = array.map((element, idx) => (
+            <div className="array-bar" key={idx} style={{ height: `${element[0]/13.5}vh`, backgroundColor: `${this.determineColour(element)}`}}></div>
+        ));
+        
         return (
             <div className="content-container">
                 <UI

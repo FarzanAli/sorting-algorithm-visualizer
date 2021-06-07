@@ -98,7 +98,7 @@ body{
 
 .array-bar{
     width: 6px;
-    background-color: var(--ui-color);
+    /* background-color: var(--ui-color); */
     display: inline-block;
     margin: 0 1px;
 }
