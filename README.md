@@ -1,3 +1,5 @@
+The application visualizes quicksort. visit https://farzanali.github.io/sorting-algorithm-visualizer-deploy/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
