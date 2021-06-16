@@ -1,6 +1,6 @@
 # sorting-algorithm-visualizer-deploy
 The application visualizes quicksort.
-visit https://farzanali.github.io/sorting-algorithm-visualizer-deploy/
+visit https://farzanali.github.io/sorting-algorithm-visualizer/
 
 # Getting Started with Create React App
 
