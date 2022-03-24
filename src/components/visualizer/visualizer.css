@@ -1,0 +1,12 @@
+.visualizer-container{
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+    margin-right: 50px;
+    width: fit-content;
+    height: 500px;
+}
+
+.bar-container{
+    width: fit-content;
+}
