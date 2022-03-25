@@ -1,3 +1,12 @@
 .information-container{
-    width: fit-content;
+    /* border: 1px solid black; */
+    width: 450px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 960px){
+    .information-container{
+        width: 350px;
+    }
 }
