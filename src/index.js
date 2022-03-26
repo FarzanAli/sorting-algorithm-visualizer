@@ -35,7 +35,7 @@ class Index extends React.Component{
     resetCallback(){
         let arr = []
         for(let i = 0; i < this.state.arraySize; i++){
-            arr.push(Math.floor((Math.random() * 300) + 10));
+            arr.push([i, Math.floor((Math.random() * 300) + 10)]);
         }
         this.setState({array: arr});
     }
@@ -53,7 +53,7 @@ class Index extends React.Component{
                 />
                 <div className='main-content'>
                     <Information
-                    name={this.state.algorithm}
+                    name={this.state.algorithmName}
                     />
                     <Visualizer
                     array={this.state.array}

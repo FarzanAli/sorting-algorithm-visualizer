@@ -1,7 +1,7 @@
 import React from 'react';
 import './visualizer.css';
 import Controls from './controls/controls.jsx';
-import { Sorts } from './sorts.js';
+import { Sorts } from '../sorts.js';
 
 let Visualizer = (props) => {
 
@@ -29,7 +29,7 @@ let Visualizer = (props) => {
                         style={{
                                 display: 'inline-block',
                                 margin: '3px',
-                                height: value.toString() + 'px',
+                                height: value[1].toString() + 'px',
                                 width: barWidth,
                                 backgroundColor: '#222222',
                                 borderRadius: '2px 2px 0px 0px'        

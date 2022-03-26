@@ -30,7 +30,7 @@ export class Sorts{
         let greater = [];
 
         for(let i = 1; i < array.length; i++){
-            if(array[i] > pivot){
+            if(array[i][1] > pivot[1]){
                 greater.push(array[i]);
             }
             else{
@@ -38,6 +38,6 @@ export class Sorts{
             }
         }
 
-        return this.quicksort(lesser).concat(pivot).concat(this.quicksort(greater))
+        return this.quicksort(lesser).concat([pivot]).concat(this.quicksort(greater))
     }
 }
