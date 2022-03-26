@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Header from './components/header/header.jsx';
 import Visualizer from './components/visualizer/visualizer.jsx';
-import Information from './components/Information/information.jsx';
+import Information from './components/information/information.jsx';
 
 class Index extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-            algorithm: "Quicksort",
+            algorithmName: "Quicksort",
             array: [],
-            arraySize: 30
+            arraySize: 30,
+            playing: false
         }
     }
 
@@ -22,12 +23,16 @@ class Index extends React.Component{
 
     setAlgorithmCallback(name){
         if(name !== this.state.algorithm){
-            this.setState({algorithm: name}, () => {console.log(this.state.algorithm)});
+            this.setState({algorithmName: name}, () => {console.log(this.state.algorithmName)});
         }
     }
 
+    setArrayCallback(arr){
+        console.log(arr);
+        this.setState({array: arr});
+    }
+
     resetCallback(){
-        console.log("a")
         let arr = []
         for(let i = 0; i < this.state.arraySize; i++){
             arr.push(Math.floor((Math.random() * 300) + 10));
@@ -35,11 +40,15 @@ class Index extends React.Component{
         this.setState({array: arr});
     }
 
+    playCallback(){
+        this.setState({playing: !this.state.playing}, () => {console.log('playing:', this.state.playing)});
+    }
+
     render(){
         return(
             <div className='main-container'>
                 <Header
-                selectedAlgorithm={this.state.algorithm}
+                algorithmName={this.state.algorithmName}
                 setAlgorithmCallback={this.setAlgorithmCallback.bind(this)}
                 />
                 <div className='main-content'>
@@ -48,8 +57,12 @@ class Index extends React.Component{
                     />
                     <Visualizer
                     array={this.state.array}
+                    name={this.state.algorithmName}
                     arraySize={this.state.arraySize}
-                    reset={this.resetCallback.bind(this)}
+                    resetCallback={this.resetCallback.bind(this)}
+                    playCallback={this.playCallback.bind(this)}
+                    playing={this.state.playing}
+                    setArrayCallback={this.setArrayCallback.bind(this)}
                     />
                 </div>
             </div>

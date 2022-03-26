@@ -1,10 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './visualizer.css';
-import Controls from './controls.jsx';
+import Controls from './controls/controls.jsx';
+import { Sorts } from './sorts.js';
 
 let Visualizer = (props) => {
+
+    const sorts = new Sorts(props.array, props.name, props.playCallback.bind(this), props.setArrayCallback.bind(this));
     
-    const visualizerWidth= 450;
+
+    let startSort = () => {
+        if(props.playing === false){
+            sorts.sortHandler();
+        }
+        props.playCallback();
+    }
+
+    const visualizerWidth = 450;
     const barWidth = 9;
 
     return(
@@ -28,7 +39,9 @@ let Visualizer = (props) => {
                 </div>
             </div>
             <Controls
-            reset={() => props.reset}
+            startSort={() => startSort}
+            playing={props.playing}
+            resetCallback={() => props.resetCallback}
             />
         </div>
     );
