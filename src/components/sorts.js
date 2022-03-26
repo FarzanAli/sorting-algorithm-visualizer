@@ -11,6 +11,7 @@ export class Sorts{
         if(this.array.length !== 0){
             if(this.name === 'Quicksort'){
                 this.array = this.quicksort(this.array);
+                console.log(this.history);
                 this.setArrayCallback(this.array);
             }
         }
@@ -37,6 +38,8 @@ export class Sorts{
                 lesser.push(array[i]);
             }
         }
+
+        this.history.push([lesser, pivot, greater])
 
         return this.quicksort(lesser).concat([pivot]).concat(this.quicksort(greater))
     }

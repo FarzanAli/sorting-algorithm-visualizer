@@ -1,3 +1,7 @@
+:root{
+    --moveBar: 10px;
+}
+
 .visualizer-container{
     display: flex;
     justify-content: right;
@@ -8,4 +12,14 @@
 
 .bar-container{
     width: fit-content;
+}
+
+.bar.moving{
+    animation: moveBar 2s;
+}
+
+@keyframes moveBar {
+    to{
+        transform: translateX(var(--moveBar));
+    }
 }
