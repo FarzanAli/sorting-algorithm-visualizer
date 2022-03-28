@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './visualizer.css';
 import Controls from './controls/controls.jsx';
 import { Sorts } from '../sorts.js';
+import { grey } from '@mui/material/colors';
 
 let Visualizer = (props) => {
-
     const sorts = new Sorts(props.array, props.name, props.playCallback.bind(this), props.setArrayCallback.bind(this));
-    let array1 = [[0, 30], [1, 40], [2, 10], [3, 20]];
-    let array2 = [[1, 40], [0, 30], [2, 10], [3, 20]];
+    const distanceBetweenBars = 15;
+    const visualizerWidth = 450;
+    const barWidth = 9;
 
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {
@@ -16,10 +17,6 @@ let Visualizer = (props) => {
             }
         }
         return false;
-    }
-
-    if(document.getElementById(0) != null){
-        document.getElementById(0).classList.add("moving");
     }
 
     let checkChange = (a1, a2) => {
@@ -40,32 +37,101 @@ let Visualizer = (props) => {
         return record;
     }
 
+    let moveBars = (record, finalArray) => {
+        if (document.getElementsByClassName('bar').length === props.arraySize) {
+            let travel = [];
+            for(let i = 0; i < record.length; i++){
+                const delta = record[i].newIndex - record[i].oldIndex;
+                document.getElementById(record[i].id).style.zIndex = 1;
+                travel.push({id: record[i].id, target: Math.abs(delta * distanceBetweenBars), delta: delta > 0 ? 1 : -1})
+            }
+
+            let targetReached = (travel) => {
+                for(let i = 0; i < travel.length; i++){
+                    if(travel[i].target > 0){
+                        return false;
+                    }
+                }
+                return true;
+            }           
+            
+            let frame = () => {
+                let flag = false;
+                if(targetReached(travel)){
+                    clearInterval(intervalId);
+                    props.setArrayCallback(finalArray);
+                    clearBars(finalArray);
+                }
+                if(flag === false){
+                    for(let i = 0; i < travel.length; i++){
+                        let elem = document.getElementById(travel[i].id);
+                        let pos = parseInt(elem.style.marginLeft, 10);
+                        if(travel[i].target > 0){
+                            if(travel[i].delta > 0){
+                                elem.style.marginLeft = (pos + 1).toString() + 'px';
+                            }
+                            else{
+                                elem.style.marginLeft = (pos - 1).toString() + 'px';
+                            }
+                            travel[i].target -= 1;
+                        }
+                    }
+                }
+            }
+
+            let intervalId = setInterval(frame, 15);
+        }
+    }
+
+    let clearBars = (bars) => {
+        for(let i = 0; i < bars.length; i++){
+            document.getElementById(bars[i][0]).style.marginLeft = (i * 15).toString() + 'px';
+            document.getElementById(bars[i][0]).style.zIndex = 0;
+        }
+    }
+
     let startSort = () => {
         if (props.playing === false) {
             sorts.sortHandler();
+            let steps = sorts.getSteps();
+            let wait = (visualizerWidth * 0.015) * 100;
+            let i = 1;
+            let progressID = setInterval(() => {
+                if(i === steps.length){
+                    clearInterval(progressID);
+                    props.playCallback();
+                }
+                else{
+                    let record = checkChange(steps[i - 1], steps[i]);
+                    moveBars(record, steps[i]);
+                    i++;
+                }
+            }, wait);
         }
         props.playCallback();
     }
-
-    const visualizerWidth = 450;
-    const barWidth = 9;
-
+    // background-color: red
+    // background-color: green
+    // background-color: black
+    // background-color: orange
     return (
         <div style={{ display: 'inline' }}>
             <div className='visualizer-container' style={{ width: visualizerWidth.toString() + 'px' }}>
                 <div className='bar-container'>
-                    {array1.map((value, idx) =>
+                    {props.array.map((value, idx) =>
                         <div
                             className='bar'
                             id={value[0]}
                             key={idx}
                             style={{
+                                position: 'absolute',
                                 display: 'inline-block',
-                                margin: '3px',
+                                marginLeft: (idx * 15).toString() + 'px',
                                 height: value[1].toString() + 'px',
                                 width: barWidth,
                                 backgroundColor: '#222222',
-                                borderRadius: '2px 2px 0px 0px'
+                                borderRadius: '2px 2px 0px 0px',
+                                zIndex: 0
                             }}
                         ></div>
                     )}

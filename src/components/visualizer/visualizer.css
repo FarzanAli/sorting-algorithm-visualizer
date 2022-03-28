@@ -1,25 +1,25 @@
-:root{
-    --moveBar: 10px;
-}
-
 .visualizer-container{
     display: flex;
-    justify-content: right;
     align-items: flex-end;
     height: 430px;
     /* border: 1px solid black; */
 }
 
 .bar-container{
-    width: fit-content;
+    padding: 1px;
+    display: flex;
+    align-items: flex-end;
 }
 
+:root{
+    --moveValue: 45px;
+}
 .bar.moving{
-    animation: moveBar 2s;
+    animation: moveBar 1s forwards;
 }
 
-@keyframes moveBar {
+@keyframes moveBar{
     to{
-        transform: translateX(var(--moveBar));
+        transform: translateX(var(--moveValue));
     }
 }

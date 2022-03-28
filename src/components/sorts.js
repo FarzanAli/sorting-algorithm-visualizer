@@ -5,20 +5,28 @@ export class Sorts{
         this.name = name;
         this.array = array;
         this.history = [];
+        this.steps = [
+            [[0, 30], [1, 40], [2, 10], [3, 20]],
+            [[0, 30], [3, 20], [1, 40], [2, 10]],
+            [[3, 20], [0, 30], [1, 40], [2, 10]],
+            [[2, 10], [0, 30], [1, 40], [3, 20]]
+        ]
     }
 
     sortHandler(){
         if(this.array.length !== 0){
             if(this.name === 'Quicksort'){
                 this.array = this.quicksort(this.array);
-                console.log(this.history);
-                this.setArrayCallback(this.array);
             }
         }
     }
 
     setAlgorithm(name){
         this.algorithm = name;
+    }
+
+    getSteps(){
+        return this.steps;
     }
 
     quicksort(array){
@@ -39,8 +47,8 @@ export class Sorts{
             }
         }
 
-        this.history.push([lesser, pivot, greater])
+        this.history.push([lesser, pivot, greater]);
 
-        return this.quicksort(lesser).concat([pivot]).concat(this.quicksort(greater))
+        return this.quicksort(lesser).concat([pivot]).concat(this.quicksort(greater));
     }
 }
