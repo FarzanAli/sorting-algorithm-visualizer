@@ -12,7 +12,7 @@ class Index extends React.Component{
         this.state = {
             algorithmName: "Quicksort",
             array: [],
-            arraySize: 4,
+            arraySize: 10,
             playing: false
         }
     }
@@ -28,7 +28,7 @@ class Index extends React.Component{
     }
 
     setArrayCallback(arr){
-        this.setState({array: arr}, () => {console.log(this.state.array)});
+        this.setState({array: arr});
     }
 
     resetCallback(){
@@ -36,8 +36,7 @@ class Index extends React.Component{
         for(let i = 0; i < this.state.arraySize; i++){
             arr.push([i, Math.floor((Math.random() * 300) + 10)]);
         }
-        // this.setState({array: arr});
-        this.setState({array: [[0, 30], [1, 40], [2, 10], [3, 20]]});
+        this.setState({array: arr});
     }
 
     playCallback(){

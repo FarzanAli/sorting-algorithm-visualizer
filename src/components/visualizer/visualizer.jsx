@@ -9,6 +9,7 @@ let Visualizer = (props) => {
     const distanceBetweenBars = 15;
     const visualizerWidth = 450;
     const barWidth = 9;
+    const frameRefresh = 15;
 
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {
@@ -78,8 +79,7 @@ let Visualizer = (props) => {
                     }
                 }
             }
-
-            let intervalId = setInterval(frame, 15);
+            let intervalId = setInterval(frame, frameRefresh);
         }
     }
 
@@ -90,30 +90,43 @@ let Visualizer = (props) => {
         }
     }
 
+    let maxTime = (record) => {
+        let max = 0;
+        for(let i = 0; i < record.length; i++){
+            if(Math.abs(record[i].newIndex - record[i].oldIndex) > max){
+                max = Math.abs(record[i].newIndex - record[i].oldIndex)
+            }
+        }
+        //Max distance traveled in given step (px)
+        max = max * distanceBetweenBars;
+
+        //Time taken to travel max distance
+        max = max * frameRefresh;
+        return max;
+    }
+
     let startSort = () => {
         if (props.playing === false) {
-            sorts.sortHandler();
+            sorts.sortHandler();            
             let steps = sorts.getSteps();
-            let wait = (visualizerWidth * 0.015) * 100;
+            let wait = 100;
             let i = 1;
-            let progressID = setInterval(() => {
-                if(i === steps.length){
-                    clearInterval(progressID);
-                    props.playCallback();
-                }
-                else{
+            let progress = () => {
+                if(i < steps.length){
                     let record = checkChange(steps[i - 1], steps[i]);
+                    wait = maxTime(record);
                     moveBars(record, steps[i]);
                     i++;
+                    setTimeout(progress, wait);
                 }
-            }, wait);
+                else{
+                    props.playCallback();
+                }                
+            }
+            setTimeout(progress, wait);
         }
         props.playCallback();
     }
-    // background-color: red
-    // background-color: green
-    // background-color: black
-    // background-color: orange
     return (
         <div style={{ display: 'inline' }}>
             <div className='visualizer-container' style={{ width: visualizerWidth.toString() + 'px' }}>
