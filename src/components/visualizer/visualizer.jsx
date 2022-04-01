@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './visualizer.css';
 import Controls from './controls/controls.jsx';
 import { Sorts } from '../sorts.js';
-import { grey } from '@mui/material/colors';
 
 let Visualizer = (props) => {
     const sorts = new Sorts(props.array, props.name, props.playCallback.bind(this), props.setArrayCallback.bind(this));
     const distanceBetweenBars = 15;
     const visualizerWidth = 450;
     const barWidth = 9;
-    const frameRefresh = 15;
+    const frameRefresh = 5;
 
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {
@@ -121,7 +120,7 @@ let Visualizer = (props) => {
                 }
                 else{
                     props.playCallback();
-                }                
+                }
             }
             setTimeout(progress, wait);
         }
@@ -142,7 +141,7 @@ let Visualizer = (props) => {
                                 marginLeft: (idx * 15).toString() + 'px',
                                 height: value[1].toString() + 'px',
                                 width: barWidth,
-                                backgroundColor: '#222222',
+                                backgroundColor: value[2] === '' ? '#222222' : value[2],
                                 borderRadius: '2px 2px 0px 0px',
                                 zIndex: 0
                             }}
