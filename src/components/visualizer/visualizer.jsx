@@ -8,7 +8,7 @@ let Visualizer = (props) => {
     const distanceBetweenBars = 15;
     const visualizerWidth = 450;
     const barWidth = 9;
-    const frameRefresh = 5;
+    const frameRefresh = 12;
 
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {

@@ -88,7 +88,18 @@ export class Sorts {
                         this.steps[i][j][2] = '';
                     }
                 }
+                let lastStep = this.steps[this.steps.length - 1].map((value) => {
+                    return value.slice();
+                })
+                lastStep.map((value) => {
+                    return value[2] = '';
+                })
+                this.steps.push(lastStep);
                 console.log(this.steps);
+            }
+            if (this.name === 'Insertion Sort'){
+                this.array = this.insertionSort(this.array);
+                console.log(this.array);
             }
         }
     }
@@ -130,5 +141,37 @@ export class Sorts {
         this.history.push([l, p, g]);
 
         return this.quicksort(lesser).concat([pivot]).concat(this.quicksort(greater));
+    }
+
+    insertionSort(array){
+        for (let i = 1; i < array.length; i++) {
+            if(array[i][1] < array[i - 1][1]){
+                let temp = array[i].slice();
+                secondary:
+                for(let j = i - 1; j >= 0; j--){
+                    if(temp[1] > array[j][1]){
+                        for(let k = i - 1; k >= j; k--){
+                            if(j === k){
+                                array[j + 1] = temp;
+                                break secondary;
+                            }
+                            let prev = array[k].slice();
+                            array[k + 1] = prev;
+                        }
+                    }
+                    if(j === 0){
+                        for(let k = i - 1; k >= 0; k--){
+                            let prev = array[k].slice();
+                            array[k + 1] = prev;
+                            if(j === k){
+                                array[j] = temp;
+                                break secondary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return array
     }
 }
