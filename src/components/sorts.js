@@ -145,32 +145,13 @@ export class Sorts {
 
     insertionSort(array){
         for (let i = 1; i < array.length; i++) {
-            if(array[i][1] < array[i - 1][1]){
-                let temp = array[i].slice();
-                secondary:
-                for(let j = i - 1; j >= 0; j--){
-                    if(temp[1] > array[j][1]){
-                        for(let k = i - 1; k >= j; k--){
-                            if(j === k){
-                                array[j + 1] = temp;
-                                break secondary;
-                            }
-                            let prev = array[k].slice();
-                            array[k + 1] = prev;
-                        }
-                    }
-                    if(j === 0){
-                        for(let k = i - 1; k >= 0; k--){
-                            let prev = array[k].slice();
-                            array[k + 1] = prev;
-                            if(j === k){
-                                array[j] = temp;
-                                break secondary;
-                            }
-                        }
-                    }
-                }
+            let temp = array[i].slice();
+            let stopIndex = i - 1;
+            for(let j = i - 1; j >= 0 && temp[1] < array[j][1]; j--){
+                array[j + 1] = array[j];
+                stopIndex = j;
             }
+            array[stopIndex] = temp;
         }
         return array
     }
