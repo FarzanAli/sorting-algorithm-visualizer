@@ -98,8 +98,7 @@ export class Sorts {
                 console.log(this.steps);
             }
             if (this.name === 'Insertion Sort'){
-                this.array = this.insertionSort(this.array);
-                console.log(this.array);
+                this.array = this.insertionSort(this.array.map((value) => {return value.slice()}));
             }
         }
     }
@@ -146,13 +145,18 @@ export class Sorts {
     insertionSort(array){
         for (let i = 1; i < array.length; i++) {
             let temp = array[i].slice();
-            let stopIndex = i - 1;
-            for(let j = i - 1; j >= 0 && temp[1] < array[j][1]; j--){
+            let j = i - 1;
+            while(j >= 0 && temp[1] < array[j][1]){
+                if(j === i - 1){
+                    this.steps[i - 1][i][2] = 'red';
+                }
                 array[j + 1] = array[j];
-                stopIndex = j;
+                j--;
             }
-            array[stopIndex] = temp;
+            array[j + 1] = temp;
+            let l = array.map((value) => {return value.slice();});
+            this.steps.push(l);
         }
-        return array
+        return array;
     }
 }
