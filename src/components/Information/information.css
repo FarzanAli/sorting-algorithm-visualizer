@@ -2,11 +2,19 @@
     /* border: 1px solid black; */
     width: 450px;
     margin-right: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chart-container{
+    margin-bottom: -100px;
 }
 
 @media screen and (max-width: 960px){
     .information-container{
         width: 350px;
+        margin-bottom: 50px;
     }
 }

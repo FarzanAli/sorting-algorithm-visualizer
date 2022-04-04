@@ -14,6 +14,7 @@ let Header = (props) => {
             <div className='algorithms-menu'>
                 <Button selected={true} name={'Quicksort'} callback={props.setAlgorithmCallback}/>
                 <Button name={'Insertion Sort'} callback={props.setAlgorithmCallback}/>
+                <Button name={'Selection Sort'} callback={props.setAlgorithmCallback}/>
             </div>
             <select className='algorithms-dropdown' onChange={handleChange}>
                 <option defaultValue={props.selectedAlgorithm === "Quicksort" ? true : false}>Quicksort</option>
