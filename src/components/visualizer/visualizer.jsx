@@ -8,7 +8,7 @@ let Visualizer = (props) => {
     const distanceBetweenBars = 15;
     const visualizerWidth = 450;
     const barWidth = 9;
-    const frameRefresh = 12;
+    const frameRefresh = 12 * (1 - props.speed/100);
 
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {
@@ -108,7 +108,7 @@ let Visualizer = (props) => {
         if (props.playing === false) {
             sorts.sortHandler();            
             let steps = sorts.getSteps();
-            let wait = 100;
+            let wait = 0;
             let i = 1;
             let progress = () => {
                 if(i < steps.length){
@@ -153,6 +153,10 @@ let Visualizer = (props) => {
                 startSort={() => startSort}
                 playing={props.playing}
                 resetCallback={() => props.resetCallback}
+                speedCallback={() => props.speedCallback}
+                speed={props.speed}
+                arraySize={props.arraySize}
+                sizeCallback={() => props.sizeCallback}
             />
         </div>
     );

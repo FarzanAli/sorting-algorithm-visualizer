@@ -13,7 +13,8 @@ class Index extends React.Component{
             algorithmName: "Quicksort",
             array: [],
             arraySize: 30,
-            playing: false
+            playing: false,
+            speed: 1
         }
     }
 
@@ -24,6 +25,7 @@ class Index extends React.Component{
     setAlgorithmCallback(name){
         if(name !== this.state.algorithm){
             this.setState({algorithmName: name}, () => {console.log(this.state.algorithmName)});
+            this.resetCallback();
         }
     }
 
@@ -44,6 +46,15 @@ class Index extends React.Component{
         this.setState({playing: !this.state.playing});
     }
 
+    speedCallback(value){
+        this.setState({speed: value.target.value});
+    }
+
+    sizeCallback(value){
+        this.setState({arraySize: value.target.value});
+        
+    }
+
     render(){
         return(
             <div className='main-container'>
@@ -59,10 +70,13 @@ class Index extends React.Component{
                     array={this.state.array}
                     name={this.state.algorithmName}
                     arraySize={this.state.arraySize}
+                    sizeCallback={this.sizeCallback.bind(this)}
                     resetCallback={this.resetCallback.bind(this)}
                     playCallback={this.playCallback.bind(this)}
                     playing={this.state.playing}
                     setArrayCallback={this.setArrayCallback.bind(this)}
+                    speed={this.state.speed}
+                    speedCallback={this.speedCallback.bind(this)}
                     />
                 </div>
             </div>

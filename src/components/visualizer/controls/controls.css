@@ -1,6 +1,14 @@
 .controls-container{
     display: flex;
+    align-items: flex-end;
+    height: 50px
 }
+
+.MuiSlider-valueLabelCircle{
+    height: 12px;
+    font-size: 10px;
+}
+
 .controls-container button{
     display: flex;
     justify-content: center;
@@ -11,3 +19,7 @@
     width: 40px;
     height: 40px;
 }
+
+.MuiSlider-thumb:hover {
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.174) !important;
+  }
