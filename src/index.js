@@ -10,7 +10,7 @@ class Index extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            algorithmName: "Selection Sort",
+            algorithmName: "Quicksort",
             array: [],
             arraySize: 30,
             playing: false,
