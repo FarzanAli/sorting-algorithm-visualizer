@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { GiPauseButton } from 'react-icons/gi';
 import { VscDebugRestart } from 'react-icons/vsc';
@@ -31,7 +31,7 @@ let Controls = (props) => {
                     Speed
                     <Slider sx={{width: '100px', marginLeft: '15px', marginRight: '25px'}} min={1} max={65} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.speed} onChange={props.speedCallback()}/>
                     Size
-                    <Slider sx={{width: '100px', marginLeft: '15px'}} min={1} max={30} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.arraySize} onChange={props.sizeCallback()} onChangeCommitted={props.resetCallback()}/>
+                    <Slider sx={{width: '100px', marginLeft: '15px'}} min={2} max={30} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.arraySize} onChange={props.sizeCallback()} onChangeCommitted={props.resetCallback()}/>
                 </div>
             </ThemeProvider>
             {/* <input type='range' min='1' max='100' onChange={props.speedCallback()} value={props.speed} className='slider' id='myRange'></input> */}

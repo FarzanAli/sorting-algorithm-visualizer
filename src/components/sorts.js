@@ -1,5 +1,3 @@
-import { Fort } from "@mui/icons-material";
-
 export class Sorts {
     constructor(array, name, playCallback, setArrayCallback) {
         this.playCallback = playCallback;
@@ -103,7 +101,7 @@ export class Sorts {
                 this.array = this.insertionSort(this.array.map((value) => {return value.slice()}));
             }
             if(this.name === 'Selection Sort'){
-                this.array = this.selectionSort(this.array);
+                this.array = this.selectionSort(this.array.map((value) => {return value.slice()}));
             }
         }
     }
@@ -178,6 +176,11 @@ export class Sorts {
             }
 
             if(min !== currentIndex){
+                let l = array.map((value) => {return value.slice();});
+                i === array.length - 1 ? l[min][2] = '' : l[min][2] = 'red';
+                i === array.length - 1 ? l[i][2] = '' : l[i][2] = 'green';
+                this.steps.push(l);
+
                 let temp = array[i];
                 array[i] = array[min];
                 array[min] = temp;
