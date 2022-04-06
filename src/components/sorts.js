@@ -168,7 +168,7 @@ export class Sorts {
     selectionSort(array){
         for(let i = 0; i < array.length; i++){
 
-            let currentIndex = i + 1;
+            let currentIndex = i;
             let min = currentIndex;
             while(currentIndex < array.length){
                 if(array[min][1] > array[currentIndex][1]){
@@ -176,8 +176,8 @@ export class Sorts {
                 }
                 currentIndex++;
             }
-            
-            if(min != currentIndex){
+
+            if(min !== currentIndex){
                 let temp = array[i];
                 array[i] = array[min];
                 array[min] = temp;
