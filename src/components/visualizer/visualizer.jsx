@@ -6,7 +6,7 @@ import { Sorts } from '../sorts.js';
 let Visualizer = (props) => {
     const sorts = new Sorts(props.array, props.name, props.playCallback.bind(this), props.setArrayCallback.bind(this));
     const distanceBetweenBars = 15;
-    const visualizerWidth = 450;
+    const visualizerWidth = 385;
     const barWidth = 9;
     const frameRefresh = 12 * (1 - props.speed/100);
 
@@ -105,7 +105,7 @@ let Visualizer = (props) => {
     }
 
     let startSort = () => {
-        if (props.playing === false) {
+        if (!props.playing) {
             sorts.sortHandler();            
             let steps = sorts.getSteps();
             let wait = 0;
@@ -114,7 +114,7 @@ let Visualizer = (props) => {
                 if(i < steps.length){
                     let record = checkChange(steps[i - 1], steps[i]);
                     wait = maxTime(record);
-                    moveBars(record, steps[i]);
+                    moveBars(record, steps[i]); 
                     i++;
                     setTimeout(progress, wait);
                 }
@@ -127,7 +127,7 @@ let Visualizer = (props) => {
         props.playCallback();
     }
     return (
-        <div style={{ display: 'inline' }}>
+        <div className='secondary-container'>
             <div className='visualizer-container' style={{ width: visualizerWidth.toString() + 'px' }}>
                 <div className='bar-container'>
                     {props.array.map((value, idx) =>
@@ -141,7 +141,7 @@ let Visualizer = (props) => {
                                 marginLeft: (idx * 15).toString() + 'px',
                                 height: value[1].toString() + 'px',
                                 width: barWidth,
-                                backgroundColor: value[2] === '' ? '#222222' : value[2],
+                                backgroundColor: value[2] === '' ? '#FEFEFE' : value[2],
                                 borderRadius: '2px 2px 0px 0px',
                                 zIndex: 0
                             }}

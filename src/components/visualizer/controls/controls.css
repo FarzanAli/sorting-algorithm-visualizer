@@ -1,7 +1,9 @@
 .controls-container{
     display: flex;
     align-items: flex-end;
-    height: 50px
+    height: 50px;
+    user-select: none;
+    width: 385px;
 }
 
 .MuiSlider-valueLabelCircle{
@@ -18,8 +20,32 @@
     padding: 0px;
     width: 40px;
     height: 40px;
+    background-color: transparent;
+    border: none;
+    color: #FEFEFE;
+}
+
+.controls-container button:disabled{
+    color: grey;
+}
+.controls-container button:hover{
+    color: grey;
+    transition: 0.2s color;
 }
 
 .MuiSlider-thumb:hover {
     box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.174) !important;
-  }
+}
+
+.slider-container{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 600px){
+    .slider-container{
+        width: 250px;
+    }
+}

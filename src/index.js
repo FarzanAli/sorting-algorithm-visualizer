@@ -12,7 +12,7 @@ class Index extends React.Component{
         this.state = {
             algorithmName: "Quicksort",
             array: [],
-            arraySize: 30,
+            arraySize: 26,
             playing: false,
             speed: 1
         }
@@ -43,7 +43,7 @@ class Index extends React.Component{
     }
 
     playCallback(){
-        this.setState({playing: !this.state.playing});
+        this.setState({playing: !this.state.playing}, () => {console.log(this.state.playing)});
     }
 
     speedCallback(value){

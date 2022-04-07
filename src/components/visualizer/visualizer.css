@@ -1,25 +1,45 @@
-.visualizer-container{
+.visualizer-container {
     display: flex;
     align-items: flex-end;
-    height: 430px;
+    height: 350px;
     /* border: 1px solid black; */
 }
 
-.bar-container{
+.bar-container {
     padding: 1px;
     display: flex;
     align-items: flex-end;
 }
 
-:root{
+:root {
     --moveValue: 45px;
 }
-.bar.moving{
+
+.bar.moving {
     animation: moveBar 1s forwards;
 }
 
-@keyframes moveBar{
-    to{
+.secondary-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@keyframes moveBar {
+    to {
         transform: translateX(var(--moveValue));
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .visualizer-container{
+        height: 300px;
+    }
+    .secondary-container{
+        margin-bottom: 15px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .visualizer-container{
     }
 }

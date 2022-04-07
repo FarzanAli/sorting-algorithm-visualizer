@@ -10,7 +10,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -28,8 +27,6 @@ let Chart = (props) => {
         labels.push(i + 1);
         data.push(props.function(i + 1));
     }
-    console.log(labels)
-    console.log(data);
 
     return (
         <Line
@@ -40,26 +37,36 @@ let Chart = (props) => {
                     data: data,
                     fill: false,
                     display: false,
-                    pointRadius: 1
-                }]
+                    pointRadius: 0,
+                    backgroundColor: 'white',
+                    borderColor: '#b0b0b0',
+                }],
             }}
             options={{
                 scales: {
                     x: {
+                        grid: {
+                            color: '#5b5b5b'
+                        },
                         ticks: {
                             maxTicksLimit: 10,
+                            color: 'white'
                             // display: false
                         }
                     },
                     y: {
+                        grid: {
+                            color: '#5b5b5b'
+                        },
                         ticks: {
                             count: 4,
+                            color: 'white'
                             // display: false
                         }
                     }
                 },
-                // showTooltips: false,
-                // events: [],
+                showTooltips: false,
+                events: [],
             }}
         />
     );
