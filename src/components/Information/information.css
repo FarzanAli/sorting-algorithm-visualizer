@@ -1,0 +1,39 @@
+.information-container {
+    /* border: 1px solid black; */
+    /* width: 450px; */
+    width: fit-content;
+    /* margin-right: 50px; */
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.information {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.chart-container {
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 960px) {
+    .information-container {
+        /* width: 400px; */
+        /* margin-bottom: 50px; */
+        /* margin-right: 0px; */
+    }
+    .information {
+        /* margin-top: 20px;
+        margin-bottom: 10px; */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .information-container {
+        /* width: 300px; */
+    }
+}

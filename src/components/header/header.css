@@ -1,0 +1,70 @@
+.header-container{
+    padding: 5px;
+    padding-left: 10px;
+    font-weight: 600;
+    font-size: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 60px;
+}
+
+.algorithms-menu{
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.algorithm-button{
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    color: var(--ui-color);
+    font-size: 20px;
+}
+.algorithm-button:hover{
+    color: #BB86FC;
+    transition: color 0.3s;
+}
+
+.algorithms-dropdown{
+    display: none;
+}
+
+@media screen and (max-width: 960px){
+    .algorithms-menu{
+        display: none;
+    }
+    .algorithms-dropdown{
+        margin-top: 10px;
+        margin-right: 8px;
+        display: block;
+        background-color: transparent;
+        color: var(--ui-color);
+        border: none;
+        width: 110px;
+        font-size: 19px;
+    }
+    .algorithms-dropdown::content{
+        border: purple;
+    }
+    .algorithms-dropdown > option {
+        color: var(--ui-color);
+        border:0px;
+        outline:0px;
+        background-color: var(--bg-color);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .header-container{
+        font-size: 20px;
+    }
+    .algorithms-dropdown{
+        margin-top: 5px;
+        font-size: 15px;
+        width: 100px;
+    }
+}
