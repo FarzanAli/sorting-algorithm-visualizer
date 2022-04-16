@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Header from './components/header/header.jsx';
 import Visualizer from './components/visualizer/visualizer.jsx';
-import Information from './components/information/information.jsx';
+import Information from './components/Information/information.jsx';
 
 class Index extends React.Component{
 

@@ -25,8 +25,8 @@
     font-size: 20px;
 }
 .algorithm-button:hover{
-    color: #BB86FC;
-    transition: color 0.3s;
+    color: #a7a7a7;
+    transition: color 0.2s;
 }
 
 .algorithms-dropdown{
