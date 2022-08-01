@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans&family=Roboto&display=swap');
 
 body {
-    --bg-color: #171717;
+    --bg-color: #232323;
     --ui-color: #FEFEFE;
     color: var(--ui-color);
     background-color: var(--bg-color);
