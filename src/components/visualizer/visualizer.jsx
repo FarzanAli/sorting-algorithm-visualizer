@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './visualizer.css';
 import Controls from './controls/controls.jsx';
 import { Sorts } from '../sorts.js';
+import { Box } from '@mui/material'
 
 let Visualizer = (props) => {
     const sorts = new Sorts(props.array, props.name, props.playCallback.bind(this), props.setArrayCallback.bind(this));
     const distanceBetweenBars = 15;
-    const visualizerWidth = 385;
+    const visualizerWidth = 200;
     const barWidth = 9;
     const frameRefresh = 12 * (1 - props.speed/100);
-
+    // document.documentElement.style.setProperty('--moveValue', ((visualizerWidth/props.arraySize)).toString() + 'px')
     let identityRecorded = (record, id) => {
         for (let i = 0; i < record.length; i++) {
             if (record[i].id === id) {
@@ -27,8 +28,7 @@ let Visualizer = (props) => {
                     if (a2[j][0] === a1[i][0]) {
                         record.push({
                             id: a1[i][0],
-                            oldIndex: i,
-                            newIndex: j
+                            animation: "move" + (j-i).toString()
                         });
                     }
                 }
@@ -106,29 +106,36 @@ let Visualizer = (props) => {
 
     let startSort = () => {
         if (!props.playing) {
-            sorts.sortHandler();            
+            sorts.sortHandler();         
             let steps = sorts.getSteps();
-            let wait = 0;
             let i = 1;
             let progress = () => {
                 if(i < steps.length){
-                    let record = checkChange(steps[i - 1], steps[i]);
-                    wait = maxTime(record);
-                    moveBars(record, steps[i]); 
+                    // let record = checkChange(steps[i - 1], steps[i]);
+                    // console.log(record)
+                    // for(let j = 0; j < record.length; j++){
+                        // let bar = document.getElementById(record[j].id);
+                        // bar.style.animation = record[j].animation + " 1s"
+                        // bar.addEventListener("animationend", () => {        
+                            // bar.style.animation = ""
+                        // })
+                    // }
+                    props.setArrayCallback(steps[i]);
                     i++;
-                    setTimeout(progress, wait);
+                    setTimeout(progress, (1/props.speed)*1000)
                 }
                 else{
-                    props.playCallback();
+                    props.playCallback()
                 }
             }
-            setTimeout(progress, wait);
+            progress();
         }
         props.playCallback();
     }
+    // ((visualizerWidth/props.arraySize) - 1).toString() + 'px',
     return (
-        <div className='secondary-container'>
-            <div className='visualizer-container' style={{ width: visualizerWidth.toString() + 'px' }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div className='visualizer-container' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <div className='bar-container'>
                     {props.array.map((value, idx) =>
                         <div
@@ -136,11 +143,10 @@ let Visualizer = (props) => {
                             id={value[0]}
                             key={idx}
                             style={{
-                                position: 'absolute',
                                 display: 'inline-block',
-                                marginLeft: (idx * 15).toString() + 'px',
+                                marginLeft: "1px",
                                 height: value[1].toString() + 'px',
-                                width: barWidth,
+                                width: '18px',
                                 backgroundColor: value[2] === '' ? '#FEFEFE' : value[2],
                                 borderRadius: '2px 2px 0px 0px',
                                 zIndex: 0
@@ -158,7 +164,7 @@ let Visualizer = (props) => {
                 arraySize={props.arraySize}
                 sizeCallback={() => props.sizeCallback}
             />
-        </div>
+        </Box>
     );
 }
 

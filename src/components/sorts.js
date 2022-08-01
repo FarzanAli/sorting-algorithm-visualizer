@@ -95,7 +95,7 @@ export class Sorts {
                     return value[2] = '';
                 })
                 this.steps.push(lastStep);
-                console.log(this.steps);
+                // console.log(this.steps);
             }
             if (this.name === 'Insertion Sort'){
                 this.array = this.insertionSort(this.array.map((value) => {return value.slice()}));
