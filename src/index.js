@@ -4,6 +4,7 @@ import './index.css';
 import Header from './components/header/header.jsx';
 import Visualizer from './components/visualizer/visualizer.jsx';
 import Information from './components/Information/information.jsx';
+import { Container, Box } from '@mui/material';
 
 class Index extends React.Component{
 
@@ -12,9 +13,9 @@ class Index extends React.Component{
         this.state = {
             algorithmName: "Quicksort",
             array: [],
-            arraySize: 26,
+            arraySize: 15,
             playing: false,
-            speed: 1
+            speed: 3
         }
     }
 
@@ -38,7 +39,7 @@ class Index extends React.Component{
         for(let i = 0; i < this.state.arraySize; i++){
             arr.push([i, Math.floor((Math.random() * 300) + 10), '']);
         }
-        // this.setState({array: [[0, 20, ''], [1, 10, ''], [2, 40, ''], [3, 30, '']]});
+        // this.setState({array: [[0, 20, ''], [1, 10, ''], [2, 40, ''], [3, 30, ''], [4, 45, ''], [5, 60, ''], [6, 90, ''], [7, 60, ''], [8, 70, '']]});
         this.setState({array: arr});
     }
 
@@ -62,23 +63,25 @@ class Index extends React.Component{
                 algorithmName={this.state.algorithmName}
                 setAlgorithmCallback={this.setAlgorithmCallback.bind(this)}
                 />
-                <div className='main-content'>
-                    <Information
-                    name={this.state.algorithmName}
-                    />
-                    <Visualizer
-                    array={this.state.array}
-                    name={this.state.algorithmName}
-                    arraySize={this.state.arraySize}
-                    sizeCallback={this.sizeCallback.bind(this)}
-                    resetCallback={this.resetCallback.bind(this)}
-                    playCallback={this.playCallback.bind(this)}
-                    playing={this.state.playing}
-                    setArrayCallback={this.setArrayCallback.bind(this)}
-                    speed={this.state.speed}
-                    speedCallback={this.speedCallback.bind(this)}
-                    />
-                </div>
+                <Container maxWidth="md" sx={{marginTop: '100px'}}>
+                    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        <Information
+                        name={this.state.algorithmName}
+                        />
+                        <Visualizer
+                        array={this.state.array}
+                        name={this.state.algorithmName}
+                        arraySize={this.state.arraySize}
+                        sizeCallback={this.sizeCallback.bind(this)}
+                        resetCallback={this.resetCallback.bind(this)}
+                        playCallback={this.playCallback.bind(this)}
+                        playing={this.state.playing}
+                        setArrayCallback={this.setArrayCallback.bind(this)}
+                        speed={this.state.speed}
+                        speedCallback={this.speedCallback.bind(this)}
+                        />
+                    </Box>
+                </Container>
             </div>
         );
     }

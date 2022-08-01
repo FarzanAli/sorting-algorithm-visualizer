@@ -12,7 +12,7 @@
 }
 
 :root {
-    --moveValue: 45px;
+    --moveValue: 19px;
 }
 
 .bar.moving {
@@ -25,11 +25,26 @@
     justify-content: center;
 }
 
-@keyframes moveBar {
-    to {
-        transform: translateX(var(--moveValue));
-    }
-}
+@keyframes move1 {to {transform: translateX(var(--moveValue));}}
+@keyframes move2 {to {transform: translateX(calc(var(--moveValue) * 2));}}
+@keyframes move3 {to {transform: translateX(calc(var(--moveValue) * 3));}}
+@keyframes move4 {to {transform: translateX(calc(var(--moveValue) * 4));}}
+@keyframes move5 {to {transform: translateX(calc(var(--moveValue) * 5));}}
+@keyframes move6 {to {transform: translateX(calc(var(--moveValue) * 6));}}
+@keyframes move7 {to {transform: translateX(calc(var(--moveValue) * 7));}}
+@keyframes move8 {to {transform: translateX(calc(var(--moveValue) * 8));}}
+@keyframes move9 {to {transform: translateX(calc(var(--moveValue) * 9));}}
+
+@keyframes move-1 {to {transform: translateX(calc(var(--moveValue) * -1));}}
+@keyframes move-2 {to {transform: translateX(calc(var(--moveValue) * -2));}}
+@keyframes move-3 {to {transform: translateX(calc(var(--moveValue) * -3));}}
+@keyframes move-4 {to {transform: translateX(calc(var(--moveValue) * -4));}}
+@keyframes move-5 {to {transform: translateX(calc(var(--moveValue) * -5));}}
+@keyframes move-6 {to {transform: translateX(calc(var(--moveValue) * -6));}}
+@keyframes move-7 {to {transform: translateX(calc(var(--moveValue) * -7));}}
+@keyframes move-8 {to {transform: translateX(calc(var(--moveValue) * -8));}}
+@keyframes move-9 {to {transform: translateX(calc(var(--moveValue) * -9));}}
+
 
 @media screen and (max-width: 960px) {
     .visualizer-container{

@@ -28,10 +28,11 @@ let Controls = (props) => {
                     {/* Speed */}
                     {/* <Slider disabled={props.playing} sx={{width: '100%', marginLeft: '15px', marginRight: '25px'}} min={1} max={65} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.speed} onChange={props.speedCallback()}/> */}
                     Size
-                    <Slider disabled={props.playing} sx={{width: '100%', marginLeft: '15px'}} min={2} max={26} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.arraySize} onChange={props.sizeCallback()} onChangeCommitted={props.resetCallback()}/>
+                    <Slider disabled={props.playing} sx={{width: '100%', marginLeft: '15px', marginRight: '15px'}} min={2} max={25} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.arraySize} onChange={props.sizeCallback()} onChangeCommitted={props.resetCallback()}/>
+                    Speed
+                    <Slider disabled={props.playing} sx={{width: '100%', marginLeft: '15px'}} min={1} max={10} color={'primary'} valueLabelDisplay={"auto"} size={'small'} value={props.speed} onChange={props.speedCallback()} onChangeCommitted={props.resetCallback()}/>
                 </div>
             </ThemeProvider>
-            {/* <input type='range' min='1' max='100' onChange={props.speedCallback()} value={props.speed} className='slider' id='myRange'></input> */}
         </div>
     );
 }
