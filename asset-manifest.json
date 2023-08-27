@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/sorting-algorithm-visualizer/static/css/main.6c26e395.css",
-    "main.js": "/sorting-algorithm-visualizer/static/js/main.6182a76d.js",
+    "main.css": "/sorting-algorithm-visualizer/static/css/main.7872c283.css",
+    "main.js": "/sorting-algorithm-visualizer/static/js/main.2765124b.js",
+    "static/media/quicksort-recurrence-tree.png": "/sorting-algorithm-visualizer/static/media/quicksort-recurrence-tree.d4dad30787a2d0d79f4e.png",
     "index.html": "/sorting-algorithm-visualizer/index.html",
-    "main.6c26e395.css.map": "/sorting-algorithm-visualizer/static/css/main.6c26e395.css.map",
-    "main.6182a76d.js.map": "/sorting-algorithm-visualizer/static/js/main.6182a76d.js.map"
+    "main.7872c283.css.map": "/sorting-algorithm-visualizer/static/css/main.7872c283.css.map",
+    "main.2765124b.js.map": "/sorting-algorithm-visualizer/static/js/main.2765124b.js.map"
   },
   "entrypoints": [
-    "static/css/main.6c26e395.css",
-    "static/js/main.6182a76d.js"
+    "static/css/main.7872c283.css",
+    "static/js/main.2765124b.js"
   ]
 }
